@@ -154,7 +154,7 @@ def call (Map configMap){
                 }
             } */
 
-           /* stage('Trigger DEV Deploy') {
+            stage('Trigger DEV Deploy') {
                 steps {
                     script {
                         build job: "../${COMPONENT}-deploy",
@@ -168,7 +168,7 @@ def call (Map configMap){
                 }
             }
 
-        }*/
+        }
         }
 
             
