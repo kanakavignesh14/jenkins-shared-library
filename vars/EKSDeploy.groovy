@@ -31,9 +31,11 @@ pipeline {
                 script{
                     withAWS(region:'us-east-1',credentials:'aws-creds') {
                         sh """
+                            set -e
                             aws eks update-kubeconfig --region ${REGION} --name ${PROJECT}-${deploy_to}
                             kubectl get nodes
-                            echo "${deploy_to}, ${appVersion}"
+                            sed -i "s/IMAGE_VERSION/${appVersion}/g" values.yaml 
+                            helm upgrade --install ${component} -f values-${deploy_to}.yaml -n ${PROJECT} --atomic --wait --timeout=5m .
                     
                         """
                     }
@@ -42,7 +44,14 @@ pipeline {
         }
         
     }
+/* tht helm command need appverison and deploy area so we gving it here appVersion coming from catalogue CI to here and 
+deplpyy to is jus variable will fix here" but will habe default value as dev */
 
+   /* here we doing BUILD ONCE AND RUN ANYWHERE IMAGE" */
+
+   /* helm upgrade --install --> first time it will install secound time it will use ugrade" 
+
+    helm upgrade --install $component -f values-${deploy_to}.yaml -n ${PROJECT} */
         
 
     post{
