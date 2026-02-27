@@ -1,3 +1,4 @@
+def call (Map configMap){
 pipeline {
     // These are pre-build sections
     agent {
@@ -59,4 +60,5 @@ pipeline {
             echo 'pipeline is aborted'
         }
     }
+}
 }
