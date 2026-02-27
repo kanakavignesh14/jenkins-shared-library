@@ -7,7 +7,7 @@ pipeline {
     }
     environment {
         COURSE = "Jenkins"
-        appVersion = configMap.get("appverion")
+        appVersion = configMap.get("appVersion")
         ACC_ID = "58633703"
         PROJECT = configMap.get("project")
         COMPONENT = configMap.get("component")
@@ -32,7 +32,7 @@ pipeline {
                         sh """
                             aws eks update-kubeconfig --region ${REGION} --name ${PROJECT}-${deploy_to}
                             kubectl get nodes
-                            echo "${deploy_to}, ${appversion}
+                            echo "${deploy_to}, ${appVersion}
                     
                         """
                     }
