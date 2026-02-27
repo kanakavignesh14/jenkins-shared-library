@@ -33,7 +33,7 @@ pipeline {
                         sh """
                             aws eks update-kubeconfig --region ${REGION} --name ${PROJECT}-${deploy_to}
                             kubectl get nodes
-                            echo "${deploy_to}, ${appVersion}
+                            echo "${deploy_to}, ${appVersion}"
                     
                         """
                     }
