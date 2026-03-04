@@ -9,7 +9,7 @@ pipeline {
     environment {
         COURSE = "Jenkins"
         appVersion = configMap.get("appVersion")
-        ACC_ID = "58633703"
+        ACC_ID = "369012866895"
         PROJECT = configMap.get("project")
         COMPONENT = configMap.get("component")
         deploy_to = configMap.get("deploy_to")
@@ -44,6 +44,7 @@ pipeline {
         }
         
     }
+    /* using sed command we fixing image verson and deploying pod using helm */
 /* tht helm command need appverison and deploy area so we gving it here appVersion coming from catalogue CI to here and 
 deplpyy to is jus variable will fix here" but will habe default value as dev */
 
@@ -52,6 +53,21 @@ deplpyy to is jus variable will fix here" but will habe default value as dev */
    /* helm upgrade --install --> first time it will install secound time it will use ugrade" 
 
     helm upgrade --install $component -f values-${deploy_to}.yaml -n ${PROJECT} */
+
+    stage {
+        when {
+            expression {deploy_to == 'dev'}
+        }
+        steps {
+            script {
+                sh """
+
+                    echo "functional test cases in dev envronment"
+
+                """
+            }
+        }
+    }
         
 
     post{
