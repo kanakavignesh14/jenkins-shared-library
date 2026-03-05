@@ -31,6 +31,7 @@ pipeline {
                     withAWS(region: 'us-east-1', credentials: 'aws-creds') {
                         sh """
                             set -e
+                            echo "{appVersion}"
                             aws eks update-kubeconfig --region ${REGION} --name ${PROJECT}-${deploy_to}
                             kubectl get nodes
                             sed -i "s/IMAGE_VERSION/${appVersion}/g" values.yaml
