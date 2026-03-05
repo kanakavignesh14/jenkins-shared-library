@@ -34,7 +34,11 @@ pipeline {
                             aws eks update-kubeconfig --region ${REGION} --name ${PROJECT}-${deploy_to}
                             kubectl get nodes
                             sed -i "s/IMAGE_VERSION/${appVersion}/g" values.yaml
-                            helm upgrade --install ${COMPONENT} -f valules-${deploy_to}.yaml -n ${PROJECT} --atomic --wait --timeout=5m .
+                            helm upgrade --install ${COMPONENT} \
+                             -f valules-${deploy_to}.yaml \
+                             -n ${PROJECT} \
+                             --rollback-on-failure \
+                             --wait --timeout=10m .
                         """
                     }
                 }
