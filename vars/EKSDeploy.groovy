@@ -115,7 +115,7 @@ deplpyy to is jus variable will fix here" but will habe default value as dev */
                expression {deploy_to == 'dev'}
            }
             steps {
-              script {
+               script {
                 sh """
 
                     echo "functional test cases in dev envronment"
