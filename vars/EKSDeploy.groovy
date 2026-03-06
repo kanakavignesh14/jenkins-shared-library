@@ -33,7 +33,7 @@ def call(Map configMap) {
                                 kubectl get nodes
                                 sed -i "s/IMAGE_VERSION/${appVersion}/g" values.yaml
                                 helm upgrade --install ${COMPONENT} \
-                                 -f values-${deploy_to}.yaml \
+                                 -f valules-${deploy_to}.yaml \
                                  -n ${PROJECT} \
                                  --rollback-on-failure \
                                  --wait --timeout=10m .
