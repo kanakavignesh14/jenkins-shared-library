@@ -34,6 +34,7 @@ def call(Map configMap) {
                                 sed -i "s/IMAGE_VERSION/${appVersion}/g" values.yaml
                                 helm upgrade --install ${COMPONENT} \
                                  -f valules-${deploy_to}.yaml \
+                                 --set image.tag=1.0 \
                                  -n ${PROJECT} \
                                  --rollback-on-failure \
                                  --wait --timeout=10m .
